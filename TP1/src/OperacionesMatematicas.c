@@ -2,7 +2,7 @@
  * Funciones.c
  *
  *  Created on: 26 mar. 2021
- *      Author: Begonia
+ *      Author: Macarena
  */
 
 #include <stdio.h>
@@ -10,12 +10,12 @@
 
 #include "OperacionesMatematicas.h"
 /**
- * @fn int OperacionSumar(int, int)
+ * @fn float OperacionSumar(float, float)
  * @brief Realiza la suma entre el numeroUno y el numeroDos
  *
- * @param numeroUno
- * @param numeroDos
- * @return resultado
+ * @param float numeroUno
+ * @param float numeroDos
+ * @return float resultado
  */
 float OperacionSumar(float numeroUno , float numeroDos)
 {
@@ -26,12 +26,12 @@ float OperacionSumar(float numeroUno , float numeroDos)
 }
 
 /**
- * @fn int OperacionMultiplicar(int, int)
+ * @fn float OperacionMultiplicar(float, float)
  * @brief Realiza la multiplicacion entre el numeroUno y el numeroDos
  *
- * @param numeroUno
- * @param numeroDos
- * @return resultado
+ * @param float numeroUno
+ * @param float numeroDos
+ * @return float resultado
  */
 float OperacionMultiplicar(float numeroUno , float numeroDos)
 {
@@ -42,12 +42,12 @@ float OperacionMultiplicar(float numeroUno , float numeroDos)
 }
 
 /**
- * @fn int OperacionRestar(int, int)
+ * @fn float OperacionRestar(float, float)
  * @brief Realiza la resta entre el numeroUno y el numeroDos
  *
- * @param numeroUno
- * @param numeroDos
- * @return resultado
+ * @param float numeroUno
+ * @param float numeroDos
+ * @return float resultado
  */
 float OperacionRestar(float numeroUno , float numeroDos)
 {
@@ -57,12 +57,12 @@ float OperacionRestar(float numeroUno , float numeroDos)
 }
 
 /**
- * @fn float OperacionDividir(int, int)
+ * @fn float OperacionDividir(float, float)
  * @brief Realiza la divicion entre el numeroUno y el numeroDos
  *
- * @param numeroUno
- * @param numeroDos
- * @return resultado
+ * @param float numeroUno
+ * @param float numeroDos
+ * @return float resultado
  */
 float OperacionDividir(float numeroUno , float numeroDos)
 {
@@ -72,11 +72,11 @@ float OperacionDividir(float numeroUno , float numeroDos)
 }
 
 /**
- * @fn int FactorialNumeroUno(int)
+ * @fn float FactorialNumeroUno(float)
  * @brief Realiza el Factorial del numeroUno
  *
- * @param numeroUno
- * @return resultado
+ * @param float numeroUno
+ * @return float resultado
  */
 float FactorialNumeroUno(float numeroUno)
 {
@@ -93,11 +93,11 @@ float FactorialNumeroUno(float numeroUno)
 }
 
 /**
- * @fn int FactorialNumeroDos(int)
+ * @fn float FactorialNumeroDos(float)
  * @brief Realiza el Factorial del numeroDos
  *
- * @param numeroDos
- * @return resultado
+ * @param float numeroDos
+ * @return float resultado
  */
 float FactorialNumeroDos(float numeroDos)
 {

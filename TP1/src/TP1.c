@@ -60,7 +60,7 @@ int main(void)
 
 	setbuf(stdout, NULL);
 
-	printf("BIENVENIDO A LA CALCULADORA\n");
+	printf("-BIENVENIDO A LA CALCULADORA\n");
 	printf("Ingrese un numero del menu para comenzar a operar: \n");
 	do
 	{
@@ -148,6 +148,16 @@ int main(void)
 					{
 						printf("No es posible dividir por cero\n");
 					}
+
+					if(numeroUno<1)
+					{
+						printf("El factorial de A que va a aparecer no cumple con la norma\n");
+					}
+					if(numeroDos<1)
+					{
+						printf("El factorial de B que va a aparecer no cumple con la norma\n");
+					}
+
 					printf("El factorial de A es: %.2f y El factorial de B es: %.2f\n",resultadoFactorialNumeroUno,resultadoFactorialNumeroDos);
 
 					banderaPrimerNumero=1;
