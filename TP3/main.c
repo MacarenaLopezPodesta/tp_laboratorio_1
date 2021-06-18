@@ -23,6 +23,12 @@ int main()
     int option=0;
     setbuf(stdout,NULL);
     LinkedList* listaEmpleados = ll_newLinkedList();
+
+    controller_CargaUltimoId("UltimoId.txt");
+    char UltimoId[20];
+    controller_leerUltimoId("UltimoId.txt",UltimoId);
+    printf("%s\n",UltimoId);
+
     do{
     	option=Menu();
 	    while(option<1 && option>10)
@@ -38,7 +44,8 @@ int main()
             	controller_loadFromBinary("data.bin",listaEmpleados);
 				break;
             case 3:
-            	controller_addEmployee(listaEmpleados);
+            	controller_addEmployee(listaEmpleados,UltimoId);
+            	//printf("%s\n",UltimoId);
             	break;
             case 4:
             	controller_editEmployee(listaEmpleados);

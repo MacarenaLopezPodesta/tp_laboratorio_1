@@ -2,7 +2,7 @@
 #define VALIDACIONES_H_
 #ifndef VALIDACIONES_H_INCLUDED
 #define VALIDACIONES_H_INCLUDED
-
+int getString_number(char *message, char *errorMessage, char *value);
 /** \brief Asks for a number and returns it validated
  *
  * \param message Message for the user

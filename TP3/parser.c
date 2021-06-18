@@ -12,10 +12,9 @@
  */
 int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
 {
-	  FILE* pUltimoId;
 	  int error = 0;
 	  char id[20];
-	  char nombre[20];
+	  char nombre[128];
 	  char horasTrabajadas[20];
 	  char sueldo[20];
 	  Employee* pEmpleado;
@@ -35,9 +34,6 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
 		       }
 		  }
 	  }
-	  pUltimoId=fopen("UltimoId.txt","w");
-	  fprintf(pUltimoId,"%s",id);
-	  fclose(pUltimoId);
 	  return error;
 }
 
@@ -51,7 +47,6 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
 int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 {
 	int error= 0;
-	FILE* pUltimoId;
 	int id;
 	int horasTrabajadas;
 	int sueldo;
@@ -71,11 +66,6 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 
 			if (id != 0 && horasTrabajadas != 0 && sueldo != 0)
 			{
-				if ((pUltimoId = fopen("UltimoId.txt", "w")) != NULL)
-				{
-					fprintf(pUltimoId, "%d", id);
-					fclose(pUltimoId);
-				}
 				ll_add(pArrayListEmployee, empleado);
 			}
 		}

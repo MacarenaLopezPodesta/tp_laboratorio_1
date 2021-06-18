@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
 #include "LinkedList.h"
@@ -6,7 +7,27 @@
 #include "Employee.h"
 #include "parser.h"
 #include "Validaciones.h"
-
+int controller_leerUltimoId(char* path, char* id)
+{
+	FILE* pUltimoId;
+	pUltimoId=fopen("UltimoId.txt","r");
+	if(pUltimoId!=NULL)
+	{
+		fscanf(pUltimoId,"%s",id);
+		fclose(pUltimoId);
+	}
+	return 1;
+}
+int controller_CargaUltimoId(char* path)
+{
+	FILE* pUltimoId;
+	if ((pUltimoId = fopen(path, "w")) != NULL)
+	{
+		fprintf(pUltimoId, "1000");
+		fclose(pUltimoId);
+	}
+	return 1;
+}
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo texto).
  *
  * \param path char*
@@ -69,40 +90,22 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
  * \return int
  *
  */
-int controller_addEmployee(LinkedList* pArrayListEmployee)
+int controller_addEmployee(LinkedList* pArrayListEmployee, char* ultimoId)
 {
-	FILE* pUltimoId;
 	Employee* empleado = employee_new();
 
-	char id[50];
-	char nombre[50];
+	char nombre[128];
 	char horasTrabajadas[50];
 	char salario[50];
 
-	pUltimoId=fopen("UltimoId.txt","r");
-	if(pUltimoId!=NULL)
-	{
-		fscanf(pUltimoId,"%s",id);
-		fclose(pUltimoId);
-	}
+	getString(nombre,128,"Ingrese nombre:\n","ERROR. Ingrese nombre:\n");
+	nombre[0]=toupper(nombre[0]);
+	getString_number("Ingrese las horas trabajadas:\n","ERROR.Ingrese las horas trabajadas:\n",horasTrabajadas);
+	getString_number("Ingrese salario:\n","ERROR.Ingrese salario:\n",salario);
+	sprintf(ultimoId, "%d",atoi(ultimoId)+1);
 
-	printf("Ingrese nombre:\n");
-	scanf("%s",nombre);
-	printf("Ingrese las horas trabajadas:\n");
-	scanf("%s",horasTrabajadas);
-	printf("Ingrese salario:\n");
-	scanf("%s",salario);
-
-	sprintf(id, "%d",atoi(id)+1);
-	empleado=employee_newParametros(id,nombre,horasTrabajadas,salario);
+	empleado=employee_newParametros(ultimoId,nombre,horasTrabajadas,salario);
     ll_add(pArrayListEmployee, empleado);
-
-    pUltimoId=fopen("UltimoId.txt","w");
-	if(pUltimoId!=NULL)
-	{
-		fscanf(pUltimoId,"%s",id);
-		fclose(pUltimoId);
-	}
 
     return 1;
 }
@@ -119,7 +122,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 	int error = 1;
 	Employee* EmpleadoAModificar;
 
-	char nuevoNombre[20];
+	char nuevoNombre[128];
 	int idParaModificar;
 	int i;
 	int nuevoSueldo;
@@ -138,23 +141,26 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 
 			  if(idParaModificar == idEncontrado)
 			  {
-				  printf("Ingrese para modificar:\n1.Nombre\n2.Horas Trabajadas\n3.Salario");
+				  printf("Ingrese para modificar:\n1.Nombre\n2.Horas Trabajadas\n3.Salario\n4.Salir:\n");
 				  opcion= getIntNew(" ","Error, ingrese un numero:\n");
+				  while(opcion<1 && opcion>4)
+				  {
+					  printf("Ingrese para modificar:\n1.Nombre\n2.Horas Trabajadas\n3.Salario\n4.Salir:\n");
+					  opcion= getIntNew(" ","Error, ingrese un numero:\n");
+				  }
 				  switch(opcion)
 				  {
 					case 1:
-					printf("Ingrese el nuevo nombre:\n");
-					scanf("%s",nuevoNombre);
+					getString(nuevoNombre,128,"Ingrese nombre:\n","ERROR. Ingrese nombre:\n");
+					nuevoNombre[0]=toupper(nuevoNombre[0]);
 					employee_setNombre(EmpleadoAModificar,nuevoNombre);
 					  break;
 					case 2:
-					printf("Ingrese nuevas horas trabajadas:\n");
-					scanf("%d", &nuevasHsTrabajadas);
+					nuevasHsTrabajadas=getIntNew("Ingrese nuevas horas trabajadas: ","Error, ingrese nuevas horas trabajadas:\n");
 					employee_setHorasTrabajadas(EmpleadoAModificar,nuevasHsTrabajadas);
 					  break;
 					case 3:
-					printf("Ingrese nuevo sueldo:\n");
-					scanf("%d",&nuevoSueldo);
+					nuevoSueldo=getIntNew("Ingrese nuevo sueldo: ","Error, ingrese nuevo sueldo:\n");
 					employee_setSueldo(EmpleadoAModificar,nuevoSueldo);
 					  break;
 				  }
